@@ -21,7 +21,7 @@ const getProductList = catchAsync(async (req, res) => {
     limit = 10,
     search = '',
     category = '',
-    sort = 'asc',
+    sort,
     brand = [],
     rating = 0,
     priceRange = [0, 1000],

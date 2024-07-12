@@ -31,7 +31,7 @@ export const getProductsListInToDB = async (
   brand: string,
   rating: number,
   priceRange: number[],
-  sort: 'asc' | 'desc',
+  sort: 'asc' | 'desc' | undefined,
   page: number,
   limit: number,
 ) => {
@@ -58,8 +58,15 @@ export const getProductsListInToDB = async (
     query.price = { $gte: priceRange[0], $lte: priceRange[1] };
   }
 
-  const sortOption: { price: SortOrder } =
-    sort === 'asc' ? { price: 1 } : { price: -1 };
+  let sortOption: string | Record<string, SortOrder> = {};
+
+  if (sort) {
+    sortOption = { price: sort === 'asc' ? 1 : -1 };
+  } else {
+    sortOption = { createdAt: -1 };
+  }
+  // const sortOption: { price: SortOrder } =
+  //   sort === 'asc' ? { price: 1 } : { price: -1 };
 
   const countPromise = Product.countDocuments(query);
 

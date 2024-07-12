@@ -9,7 +9,7 @@ export interface IProduct {
   image: string;
 }
 
-export interface UpdateProductStockParams {
+export interface UpdateProductStockItem {
   productId: string;
   quantity: number;
 }
