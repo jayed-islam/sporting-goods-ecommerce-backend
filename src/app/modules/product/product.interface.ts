@@ -1,7 +1,15 @@
 export interface IProduct {
   name: string;
   description: string;
-  price: number;
+  category: string;
+  brand: string;
   stock: number;
-  images: string[];
+  rating: number;
+  price: number;
+  image: string;
+}
+
+export interface UpdateProductStockParams {
+  productId: string;
+  quantity: number;
 }

@@ -1,29 +1,45 @@
-import { Schema, model } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { IProduct } from './product.interface';
 
 const productSchema = new Schema<IProduct>(
   {
     name: {
       type: String,
-      required: [true, 'Name is required'],
+      required: true,
+      trim: true,
     },
     description: {
       type: String,
-      required: [true, 'Description is required'],
+      required: true,
     },
-    price: {
-      type: Number,
-      required: [true, 'Price is required'],
-      min: [0, 'Price cannot be negative'],
+    category: {
+      type: String,
+      required: true,
+    },
+    brand: {
+      type: String,
+      required: true,
     },
     stock: {
       type: Number,
-      required: [true, 'Stock is required'],
-      min: [0, 'Stock cannot be negative'],
+      required: true,
+      min: 0,
     },
-    images: {
-      type: [String],
-      required: [true, 'Images are required'],
+    rating: {
+      type: Number,
+      required: true,
+      min: 0,
+      max: 5,
+      default: 3,
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    image: {
+      type: String,
+      required: true,
     },
   },
   {
@@ -31,6 +47,4 @@ const productSchema = new Schema<IProduct>(
   },
 );
 
-const Product = model<IProduct>('Product', productSchema);
-
-export default Product;
+export const Product = model<IProduct>('Product', productSchema);
